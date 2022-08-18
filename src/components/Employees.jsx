@@ -7,17 +7,22 @@ import Timesheet from "./Timesheet"
 const Employees = () => {
   const dispatch = useDispatch()
 
-  //   useEffect(() => {
-  //     dispatch(fetchEmployees())
-  //   }, [dispatch])
-  //   const employees = useSelector((state) => state.employees.employees)
-  //   const requestStatus = useSelector((state) => state.requestStatus)
+  useEffect(() => {
+    dispatch(fetchEmployees())
+  }, [dispatch])
+  const employees = useSelector((state) => state.employees.employees)
 
   return (
     <div>
-      {/* {(employees || []).map((employee) => {
-        return <Employee key={employee.ID} employeeProp={employee} />
-      })} */}
+      {employees.map((employee) => {
+        return (
+          <Employee
+            className="employeeBlock"
+            key={employee.ID}
+            employeeProp={employee}
+          />
+        )
+      })}
       <Timesheet />
     </div>
   )

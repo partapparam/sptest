@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = `${process.env.REACT_APP_SP_URL}employees/`
+const baseURL = `${process.env.REACT_APP_SP_URL}/employees/`
 const header = {
   "Content-Type": "application/json",
   authorization: `Bearer ${process.env.REACT_APP_SP_TOKEN}`,

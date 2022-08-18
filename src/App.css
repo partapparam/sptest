@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -36,4 +36,15 @@
   100% {
     transform: translateY(0px);
   }
+}
+
+.employeeBlock {
+  border: solid black 1px;
+  padding: 4px;
+}
+
+.timeBlock {
+  border: solid black 1px;
+  padding: 4px;
+  display: inline-block;
 }

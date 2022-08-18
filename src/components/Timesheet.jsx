@@ -1,22 +1,34 @@
 import React, { useEffect } from "react"
-import axios from "axios"
-
-const url = `${process.env.REACT_APP_SP_URL}schedules/?Staff.ID=48`
+import { fetchTimesheets } from "../reducers/timesheetReducer"
+import { useDispatch, useSelector } from "react-redux"
 
 const Timesheet = () => {
-  useEffect(() => {
-    axios
-      .get(url, {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${process.env.REACT_APP_SP_TOKEN}`,
-        },
-      })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err))
-  }, [])
+  const dispatch = useDispatch()
+  const id = 48
+  const start = "2022-08-10"
+  const end = "2022-08-18"
 
-  return <div></div>
+  useEffect(() => {
+    dispatch(fetchTimesheets({ id, start, end }))
+  }, [dispatch])
+
+  const timesheets = useSelector((state) => state.timesheet)
+
+  return (
+    <div>
+      {timesheets.map((block) => {
+        return (
+          <div className="timeBlock">
+            <p>{block.Date}</p>
+            <p>{block.ScheduleType}</p>
+            <p>{block.StartTime}</p>
+            <p>{block.EndTime}</p>
+            <br />
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default Timesheet
