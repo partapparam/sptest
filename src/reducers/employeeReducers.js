@@ -1,30 +1,40 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import employeeService from "../services/employee"
 
-const employeeSlice = createSlice({
+export const fetchEmployees = createAsyncThunk(
+  "employees/fetchEmployees",
+  async () => {
+    const employeeList = await employeeService.getAll()
+    return employeeList
+  }
+)
+
+const employeesSlice = createSlice({
   name: "employees",
-  initialState: [],
+  initialState: { employees: [], status: "" },
   reducers: {
-    appendEmployees(state, action) {
-      //   console.log(action.payload)
-      // error here --- this will keep adding employee [] to the state
-      state.push(action.payload)
-      //   console.log(state.employees)
-    },
+    // setState(state, action) {
+    //   state.employees = [...action.payload]
+    //   Immer lets us update state in two ways: either mutating the existing state value, or returning a new result.
+    //   return action.payload will replace the existing state completely with what we return
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchEmployees.fulfilled, (state, action) => {
+      state.status = "success"
+      state.employees = action.payload
+    })
   },
 })
 
 // exports the action appendEmployee
-export const { appendEmployees } = employeeSlice.actions
+// export const { setState } = employeesSlice.actions
 
 // thunk that we can call to perform async action
-export const initializeEmployees = () => {
-  return async (dispatch, getState) => {
-    console.log(getState())
-    const allEmployees = await employeeService.getAll()
-    dispatch(appendEmployees(allEmployees))
-    console.log("satte after", getState())
-  }
-}
+// export const initializeEmployees = () => {
+//   return async (dispatch, getState) => {
+//     const allEmployees = await employeeService.getAll()
+//     dispatch(setState(allEmployees))
+//   }
+// }
 
-export default employeeSlice.reducer
+export default employeesSlice.reducer

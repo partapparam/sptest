@@ -9,7 +9,7 @@ const header = {
 
 const getAll = async () => {
   const response = await axios.get(baseURL, { headers: header })
-  console.log(response.data)
+  //   console.log(response.data)
   return response.data
 }
 
