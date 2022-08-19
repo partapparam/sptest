@@ -1,9 +1,14 @@
 import React from "react"
 
-const Employee = ({ employeeProp }) => {
+const Employee = ({ employeeProp, handleClickProp }) => {
   return (
     <div>
-      <li key={employeeProp.ID}>{employeeProp.Name}</li>
+      <li
+        onClick={() => handleClickProp(employeeProp.ID)}
+        key={employeeProp.ID}
+      >
+        {employeeProp.Name}
+      </li>
     </div>
   )
 }

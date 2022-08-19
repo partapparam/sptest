@@ -13,8 +13,10 @@ function App() {
 
   return (
     <div className="App">
-      Hello
-      <Employees />
+      <h2>simPRO Employees</h2>
+      <div className="employeeList">
+        <Employees />
+      </div>
     </div>
   )
 }

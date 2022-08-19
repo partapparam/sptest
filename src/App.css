@@ -38,13 +38,22 @@
   }
 }
 
+.employeeList {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 20px;
+}
+
 .employeeBlock {
   border: solid black 1px;
+  display: grid;
   padding: 4px;
+  grid-column: 1 / span 1;
 }
 
 .timeBlock {
   border: solid black 1px;
   padding: 4px;
   display: inline-block;
+  grid-column: 2;
 }
